@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人介绍</title>
+    <style>
+        /* ===== 全局重置与基础样式 ===== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f5f7fa;
+            color: #2c3e50;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+        }
+
+        /* ===== 主容器：页面卡片 ===== */
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: #10b981;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* ===== 头部区域 ===== */
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 48px 32px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .header .subtitle {
+            margin-top: 8px;
+            font-size: 1rem;
+            opacity: 0.85;
+        }
+
+        /* ===== 内容区域 ===== */
+        .content {
+            padding: 32px;
+        }
+
+        /* ===== 占位图片 ===== */
+        .avatar-section {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .avatar-placeholder {
+            /* position:absolute;bottom: 20px; right: 20px;  */
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #e8edf2;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #b0bec5;
+            border: 4px solid #4facfe;
+            /* 占位图片示意：纯 CSS 绘制的用户图标 */
+        }
+
+        .avatar-placeholder::after {
+            content: "👤";
+            font-size: 4rem;
+            opacity: 1;
+        }
+
+        .avatar-caption {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #95a5a6;
+        }
+
+        /* ===== 技能列表 ===== */
+        .skills-section {
+            margin-bottom: 36px;
+            justify-content: center;
+        }
+
+        .skills-section h2 {
+            font-size: 1.35rem;
+            margin-bottom: 16px;
+            color: #1a1a2e;
+            border-left: 4px solid #4facfe;
+            padding-left: 12px;
+        }
+
+
+        .skills-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skills-list li {
+            background: #eef6ff;
+            color: #1e6bb8;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid #d0e4f7;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .skills-list li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.25);
+        }
+
+        /* ===== 工作经历表格样式 ===== */
+        .work-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            color: #d1d5db;
+            margin-top: 12px;
+        }
+
+        /* 表头：深绿底色，白色文字 */
+        .work-table thead th {
+            background: #1a3c2a;
+            color: #e0f2e0;
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #2d5a3d;
+            white-space: nowrap;
+        }
+
+        /* 表体单元格 */
+        .work-table tbody td {
+            padding: 11px 14px;
+            border-bottom: 1px solid #2a3a2e;
+            vertical-align: top;
+        }
+
+        /* 行 hover 效果 */
+        .work-table tbody tr:hover {
+            background: rgba(78, 204, 120, 0.06);
+        }
+
+        /* 最后一行去掉底部边框（可选） */
+        .work-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 公司列稍微加粗 */
+        .work-table tbody td:nth-child(2) {
+            font-weight: 500;
+            color: #6ee7a8;
+        }
+
+        /* ===== 联系表单 ===== */
+        .contact-section h2 {
+            font-size: 1.35rem;
+            margin-bottom: 16px;
+            color: #1a1a2e;
+            border-left: 4px solid #4facfe;
+            padding-left: 12px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px 14px;
+            border: 2px solid #dcdfe6;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border-color 0.25s;
+            outline: none;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #4facfe;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            align-self: flex-start;
+            padding: 12px 36px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.25s, transform 0.2s;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn-submit:active {
+            transform: scale(0.97);
+        }
+
+        /* ===== 脚注 ===== */
+        .footer {
+            text-align: center;
+            padding: 16px;
+            font-size: 0.8rem;
+            color: #b0bec5;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+        }
+
+        .skills {
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        table {
+            font-size: 12px;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- 页面主容器 -->
+    <main class="container">
+
+        <!-- 头部：标题 -->
+        <header class="header">
+            <h1>我的个人介绍</h1>
+            <p class="subtitle">Hello, World! 很高兴认识你。</p>
+        </header>
+
+        <!-- 主体内容 -->
+        <article class="content">
+
+            <!-- 占位图片区域 -->
+            <section class="avatar-section" aria-label="个人头像">
+                <div class="avatar-placeholder" title="占位头像"></div>
+                <p class="avatar-caption">（此处可替换为真实照片）</p>
+            </section>
+
+            <!-- 技能列表 -->
+            <section class="skills-section" aria-label="技能列表">
+                <h2>专业技能</h2>
+                <ul class="skills-list">
+                    <li>前端开发</li>
+                    <li>AI 使用</li>
+                    <li>英语</li>
+                    <li>AI编程</li>
+                </ul>
+            </section>
+
+            <!-- 工作经历 -->
+            <table class="work-table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>公司</th>
+                        <th>职位</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2026.03 — 至今</td>
+                        <td>深圳绿洲科技有限公司</td>
+                        <td>前端开发工程师</td>
+                        <td>负责公司 SaaS 平台核心模块重构，使用 React + TypeScript 开发，主导组件库建设与性能优化</td>
+                    </tr>
+                    <tr>
+                        <td>2023.07 — 2026.02</td>
+                        <td>杭州青云网络</td>
+                        <td>Web 开发实习生 / 初级工程师</td>
+                        <td>参与电商后台管理系统开发，负责订单模块与数据看板的前端实现，独立完成 3 个营销活动页面</td>
+                    </tr>
+                    <tr>
+                        <td>2022.06 — 2023.06</td>
+                        <td>自由职业 / 个人项目</td>
+                        <td>独立开发者</td>
+                        <td>接外包项目 5+ 个，涵盖企业官网、小程序、活动落地页，同步学习 AI 工具链并应用于工作流</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 联系表单 -->
+            <section class="contact-section" aria-label="联系表单">
+                <h2>联系我</h2>
+                <form class="contact-form" action="#" method="post" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input type="text" id="name" name="name" placeholder="请输入您的姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">邮箱</label>
+                        <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">留言</label>
+                        <textarea id="message" name="message" placeholder="请输入您的留言内容" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">发送</button>
+                </form>
+            </section>
+
+        </article>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            &copy; 2026 我的个人介绍 | 由 Marvis 协助生成
+        </footer>
+
+    </main>
+
+    <!-- 表单提交拦截脚本 -->
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            if (name && email && message) {
+                alert('感谢您的留言，' + name + '！我会尽快回复。');
+                event.target.reset();
+            }
+        }
+    </script>
+
+    <script>
+        // 点击技能标签，弹出提示
+        let skillTags = document.querySelectorAll('.skills-section li');
+        skillTags.forEach(tag => {
+            tag.addEventListener('click', function () {
+                alert('你点击了：' + this.textContent);
+            });
+        });
+    </script>
+
+    <script>
+        // 页面加载后自动获取一句名言，显示在页面上
+        async function showQuote() {
+            try {
+                let response = await fetch('htps://jsonplaceholder.typicode.com/users/1');
+                let data = await response.json();
+                console.log(data);
+
+                // 创建名言元素
+                let quoteDiv = document.createElement('div');
+                quoteDiv.style.cssText = 'text-align:center; padding:20px; margin:20px 0; font-style:italic; color:#555;';
+                quoteDiv.innerHTML = `<p style="font-size:1.1rem;">"${data.content}"</p>
+                              <p style="font-size:0.85rem; color:#888;">—— ${data.author}</p>`;
+
+                // 插入到"专业技能"区域后面
+                let skillsSection = document.querySelector('.skills-section');
+                skillsSection.after(quoteDiv);
+            } catch (err) {
+                let errDiv = document.createElement('div');
+                errDiv.style.cssText = 'text-align:center;padding:50px;margin:50px 20px;font-style:italic;color:#0000CD';
+                errDiv.innerHTML = '<p style = "font-size:1.5rem;">获取失败，请检查网络连接</p>';
+                let skillSection = document.querySelector('.skills-section');
+                skillSection.after(errDiv);
+                console.log('名言获取失败:', err);
+            }
+        }
+
+        showQuote();
+    </script>
+
+</body>
+
+</html>

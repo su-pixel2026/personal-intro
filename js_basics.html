@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS 基础练习</title>
+</head>
+
+<body>
+  <h1>打开控制台看结果（F12 → Console）</h1>
+  <script>
+    /*第一部分，数据类型
+
+
+    // 三种变量声明
+    let name = '老板';           // let：可以改
+    const age = 25;              // const：不能改
+    var oldWay = '旧写法';       // var：有坑，了解即可
+
+    // 7 种数据类型
+    let str = 'hello';           // string 字符串
+    let num = 42;                // number 数字
+    let bool = true;             // boolean 布尔
+    let empty = null;            // null 空
+    let notDefined;              // undefined 未定义
+    let sym = Symbol('id');      // symbol 唯一标识
+    let big = 100n;              // bigint 大整数
+
+    // typeof 看类型
+    console.log(typeof str);     // string
+    console.log(typeof num);     // number
+    console.log(typeof bool);    // boolean
+    console.log(typeof empty);   // object（这是一个著名的 bug）
+    console.log(typeof notDefined); // undefined
+    console.log(typeof sym);     // symbol
+    console.log(typeof big);     // bigint
+
+    console.log('JS 练习开始');
+    var x = 10;
+    console.log(x);
+    if (true) {
+      var a = 1;
+      let b = 2;
+      console.log(a);
+      console.log(b);
+    }
+    let nm = '老板';
+    let msg = `你好，${nm}`;   // '你好，老板'
+    console.log(msg);
+    */
+
+
+
+    /*第二部分：数据真假判断
+        console.log(10 + 5);    // 15  加
+        console.log(10 - 5);    // 5   减
+        console.log(10 * 5);    // 50  乘
+        console.log(10 / 3);    // 3.333...  除
+        console.log(10 % 3);    // 1   取余（10 除以 3 余 1）
+        console.log(2 ** 3);    // 8   2 的 3 次方
+
+        // ===== 比较运算符 =====
+        console.log(5 > 3);     // true
+        console.log(5 < 3);     // false
+        console.log(5 === 5);   // true  三个等号：值和类型都相等
+        console.log(5 === '5'); // false 数字 vs 字符串，不相等
+        console.log(5 == '5');  // true  两个等号会类型转换（别用它）
+
+        // ===== 逻辑运算符 =====
+        console.log(true && false);  // false  且
+        console.log(true || false);  // true   或
+        console.log(!true);          // false  非
+
+        // ===== 条件判断 =====
+        let score = 85;
+
+        if (score >= 90) {
+          console.log('优秀');
+        } else if (score >= 70) {
+          console.log('良好');
+        } else if (score >= 60) {
+          console.log('及格');
+        } else {
+          console.log('不及格');
+        }
+
+        // ===== 三元运算符（if 的简写版）=====
+        let result = score >= 60 ? '通过' : '挂科';
+        console.log(result);
+
+        // ===== 真值假值 =====
+        // 以下 6 个值在条件判断中等同于 false
+        console.log(Boolean(0));        // false
+        console.log(Boolean(''));       // false  空字符串
+        console.log(Boolean(null));     // false
+        console.log(Boolean(undefined));// false
+        console.log(Boolean(NaN));      // false
+        console.log(Boolean(false));    // false
+
+        // 其他所有值都是 true
+        console.log(Boolean('hello')); // true
+        console.log(Boolean(42));      // true
+        console.log(Boolean([]));      // true  空数组也是 true
+        console.log(Boolean({}));      // true  空对象也是 true
+
+      console.log(5 + 9 < 12 + 8 || 1 + 2 > 3 + 6)
+    */
+
+
+    /*第三部分：循环
+
+    // ===== for 循环 =====
+    // 语法：for (初始化; 条件; 每次循环后做什么)
+    console.log('--- for 循环 1 到 5 ---');
+    for (let i = 1; i <= 5; i++) {
+      console.log(i);
+    }
+
+    // ===== 九九乘法表 =====
+    console.log('--- 九九乘法表 ---');
+    for (let i = 1; i <= 9; i++) {
+      let row = '';
+      for (let j = 1; j <= i; j++) {
+        row += `${j}×${i}=${j * i}\t`;  // \t 是制表符，对齐用
+      }
+      console.log(row);
+    }
+
+    // ===== while 循环 =====
+    console.log('--- while 倒计时 ---');
+    let count = 5;
+    while (count > 0) {
+      console.log(count);
+      count--;
+    }
+    console.log('发射！');
+
+    // ===== 遍历数组 for-of =====
+    let skills = ['前端开发', 'AI 使用', '英语', 'AI 编程','999'];
+    console.log('--- 技能列表 ---');
+    for (let skill of skills) {
+      console.log(skill);
+    }
+
+    */
+
+
+    /*//第四部分：数组+函数
+
+    // ===== 数组 =====
+
+    // 创建数组
+    let todos = ['学 HTML', '学 CSS', '学 JS', '做项目'];
+    console.log('数组内容:', todos);
+    console.log('数组长度:', todos.length);
+    console.log('第二个元素:', todos[1]);  // 索引从 0 开始，[1] 是第二个
+
+    // 增删改
+    todos.push('学 React');       // 尾部添加
+    console.log('push 后:', todos);
+    todos.pop();                  // 尾部删除（返回被删的元素）
+    console.log('pop 后:', todos);
+    todos.unshift('先学概念');    // 头部添加
+    console.log('unshift 后:', todos);
+    todos.shift();                // 头部删除
+    console.log('shift 后:', todos);
+
+    // ===== 数组三大核心方法 =====
+    let scores = [72, 85, 93, 48, 66];
+
+    // map：每个元素加工后返回新数组
+
+
+    let doubled = scores.map(s => s * 2);
+    console.log('map 翻倍:', doubled);
+
+    // filter：筛选符合条件的，返回新数组
+    let passed = scores.filter(s => s >= 60);
+    console.log('filter 及格:', passed);
+
+    // forEach：逐个执行动作，不返回新数组
+    console.log('forEach 遍历:');
+    scores.forEach((s, i) => {
+      console.log(`第${i}个分数: ${s}`);
+    });
+
+    // ===== 函数 =====
+
+    // 普通函数
+    function add(a, b) {
+      return a + b;
+    }
+    console.log('add(3, 5):', add(3, 5));
+
+    // 箭头函数（简写）
+    const multiply = (a, b) => a * b;
+    console.log('multiply(3, 5):', multiply(3, 5));
+
+    // 函数作用：封装重复逻辑
+    function getLevel(score) {
+      if (score >= 90) return '优秀';
+      if (score >= 60) return '及格';
+      return '不及格';
+    }
+
+    console.log('--- 成绩等级表 ---');
+    scores.forEach(s => {
+      console.log(`${s} 分 → ${getLevel(s)}`);
+    });
+    
+    */
+
+
+    //第五部分：异步
+    // ===== 1. setTimeout：延迟执行 =====
+    console.log('1. 开始');
+    setTimeout(() => {
+      console.log('2. 3 秒后才出现');
+    }, 3000);
+    console.log('3. 结束');
+
+    // 注意 Console 输出顺序：1 → 3 → 2
+    // JS 不会傻等 3 秒，它先把后面的事做了，3 秒后再回来处理
+
+    // ===== 2. Promise：未来的结果 =====
+    let myPromise = new Promise((resolve, reject) => {
+      let success = true;  // 试试改成 false 看变化
+      setTimeout(() => {
+        if (success) {
+          resolve('数据拿到了！');
+        } else {
+          reject('网络错误');
+        }
+      }, 2000);
+    });
+
+    myPromise
+      .then(data => console.log('成功:', data))
+      .catch(err => console.log('失败:', err));
+
+    // ===== 3. async/await：Promise 的简洁写法 =====
+    async function fetchData() {
+      console.log('开始请求...');
+      try {
+        let data = await myPromise;  // await = 等 Promise 出结果再往下走
+        console.log('await 拿到:', data);
+      } catch (err) {
+        console.log('await 失败:', err);
+      }
+    }
+    fetchData();
+
+    // ===== 4. fetch：真正从网上拿数据 =====
+    async function getQuote() {
+      try {
+        let response = await fetch('https://api.quotable.io/random');
+        let data = await response.json();
+        console.log(data);
+        console.log('名言:', data.content);
+        console.log('作者:', data.length);
+      } catch (err) {
+        console.log('请求失败:', err);
+      }
+    }
+    getQuote();
+
+
+  </script>
+</body>
+
+</html>
